@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Mejora de Procesos Logística-Ventas: Fase 1</title>
+    <!-- Incluir Tailwind CSS para un diseño limpio y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración para usar la fuente Inter y colores personalizados -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary-blue': '#0056b3', /* Azul corporativo, más oscuro */
+                        'bg-light': '#f8f9fa', /* Fondo muy claro */
+                        'accent-green': '#28a745', /* Verde para énfasis positivo */
+                        'accent-orange': '#ffc107', /* Naranja para advertencias o puntos de atención */
+                        'text-dark': '#343a40', /* Texto oscuro */
+                        'border-light': '#e9ecef', /* Borde claro */
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Incluir MathJax para renderizado de fórmulas LaTeX -->
+    <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Incluir Chart.js y el plugin DataLabels para las visualizaciones -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
+    <style>
+        /* Estilos base */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            line-height: 1.6;
+        }
+        .presentation-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 1rem;
+            padding: 2.5rem;
+        }
+        h1, h2, h3 {
+            color: #0056b3; /* Primary Blue */
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; border-bottom: 2px solid #e9ecef; padding-bottom: 0.75rem; margin-top: 2.5rem; }
+        h3 { font-size: 1.5rem; color: #343a40; margin-top: 1.5rem; }
+        .kpi-card {
+            background: #e9f5ff; /* Light blue background for KPI cards */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #0056b3;
+            margin-bottom: 1.5rem;
+        }
+        .problem-section {
+            background-color: #fff9e6; /* Very light yellow for problems */
+            border-left: 5px solid #ffc107; /* Accent orange for warnings */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .solution-section {
+            background-color: #e6ffed; /* Very light green for solutions */
+            border-left: 5px solid #28a745; /* Accent green */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .formula-box {
+            background-color: #ffffff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #dee2e6;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            font-family: 'Georgia', serif; /* Estilo para fórmulas */
+        }
+        .math {
+            font-size: 1.1em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="presentation-container">
+
+    <!-- SLIDE 1: TÍTULO Y OBJETIVO REVISADO -->
+    <header class="mb-8 pb-4 border-b-2 border-border-light">
+        <h1 class="text-primary-blue text-4xl lg:text-5xl mb-2">Informe de Mejora de Procesos Logística-Ventas</h1>
+        <p class="text-gray-600 text-lg">
+            <strong>Fase 1: Diagnóstico de Indicadores Clave y Puntos de Fricción</strong>
+        </p>
+        <p class="text-gray-700 mt-4">
+            Este informe presenta nuestros indicadores principales, su propósito y un análisis de los desafíos operativos que tenemos entre Logística y Ventas. El objetivo es claro: optimizar nuestra cadena de suministro y lograr que ambos equipos trabajen más alineados.
+        </p>
+    </header>
+
+    <!-- SLIDE 2: METODOLOGÍA Y ENFOQUE: EL PODER DEL "POR QUÉ" -->
+    <h2 class="text-primary-blue">1. Nuestra Metodología: Entender el "Por Qué"</h2>
+    <p class="mb-6 text-gray-700">
+        Para asegurar que nuestro trabajo tenga sentido, hemos adoptado la idea de <strong>"Empezar por el Por Qué"</strong>. Esto nos ayuda a ir más allá de solo medir cosas, para entender la razón de fondo de cada indicador y cómo ayuda a Alimentos Satvicos, a nuestros clientes y a la rentabilidad del negocio.
+    </p>
+    <p class="mb-6 text-gray-700">
+        Al conectar cada métrica con un propósito real, los datos se convierten en acciones que nos ayudan a mejorar y a colaborar mejor entre departamentos.
+    </p>
+
+    <!-- SLIDE 3: INDICADORES CLAVE DE DESEMPEÑO LOGÍSTICO (KPIs) -->
+    <h2 class="text-primary-blue">2. Indicadores y Controles Clave de Logística</h2>
+    <p class="mb-6 text-gray-700">
+        A continuación se detallan los indicadores que usamos para medir el desempeño y los controles operativos que aplicamos para asegurar la rentabilidad y la calidad del servicio.
+    </p>
+
+    <!-- KPI 2.1: Fletes como % de Ventas -->
+    <div class="kpi-card">
+        <h3 class="text-primary-blue">2.1. Indicador: Fletes como % de Ventas</h3>
+        <p class="font-semibold text-text-dark mt-3">Propósito (El "Por Qué"):</p>
+        <p class="text-sm text-gray-700 mb-2">
+            <strong>Asegurar que cada venta sea rentable</strong> y que nuestros precios de entrega sean competitivos. Este indicador es vital para mantener a raya los costos de transporte, garantizando que el cliente sienta que paga lo justo por el envío y que la empresa proteja su margen.
+        </p>
+        <p class="font-semibold text-text-dark mt-3">Objetivo o Cálculo:</p>
+        <div class="formula-box">
+            <span class="math">$$ \text{Fletes % Venta} = \frac{\text{Costo total de Fletes}}{\text{Valor total de Ventas}} \times 100 $$</span>
+        </div>
+        <p class="font-semibold text-text-dark mt-3">Beneficios para el Equipo y la Empresa:</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li><strong>Para Logística:</strong> Nos permite gestionar mejor las rutas y nos da una base sólida para negociar con los transportistas, buscando siempre ahorros y mayor eficiencia.</li>
+            <li><strong>Para Finanzas y Dirección:</strong> Da una visión clara de cuánto pesan los fletes en la estructura de costos y la rentabilidad por cliente, ayudando a tomar decisiones de precios.</li>
+            <li><strong>Para Ventas:</strong> Ayuda a definir políticas de cobro de fletes que sean justas y competitivas, mejorando la propuesta de valor al cliente.</li>
+        </ul>
+    </div>
+
+    <!-- Control Pre-Despacho 2.2: Cumplimiento del Límite del 4% -->
+    <div class="kpi-card">
+        <h3 class="text-primary-blue">2.2. Control Pre-Despacho: Cumplimiento del Límite del 4%</h3>
+        <p class="font-semibold text-text-dark mt-3">Propósito (El "Por Qué"):</p>
+        <p class="text-sm text-gray-700 mb-2">
+            <strong>Asegurar el cumplimiento de la directriz histórica del 4% en cada despacho individual.</strong> Este no es un indicador post-mortem, sino un control preventivo que aplicamos antes de planificar una ruta. Su propósito es validar la rentabilidad de cada envío específico y mantener la disciplina operativa exigida por la directiva.
+        </p>
+        <p class="font-semibold text-text-dark mt-3">Proceso de Verificación (No es un Indicador):</p>
+        <div class="formula-box" style="font-family: 'Inter', sans-serif; text-align: left; padding-left: 1.5rem;">
+            <p class="text-sm text-gray-800">Previo a cada despacho, se realiza el siguiente cálculo de validación:</p>
+            <p class="math my-2 text-center">$$ \frac{\text{Costo del Flete Específico}}{\text{Valor de la Venta Específica}} \times 100 \le 4\% $$</p>
+            <p class="text-sm text-gray-800">Si el resultado excede el 4%, el despacho se marca para revisión y optimización (ej. consolidar con otra carga) antes de ser aprobado.</p>
+        </div>
+        <p class="font-semibold text-text-dark mt-3">Beneficios para el Equipo y la Empresa:</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li><strong>Para Logística:</strong> Nos da una herramienta clara para aprobar o rechazar la viabilidad de un despacho, forzando la búsqueda de eficiencia antes de incurrir en el costo.</li>
+            <li><strong>Para Ventas:</strong> Fomenta la creación de pedidos que sean logísticamente rentables desde el inicio, alineando la venta con la directriz de la compañía.</li>
+            <li><strong>Evolución Estratégica (Finanzas):</strong> El registro de los despachos que requieren revisión es el insumo para que Finanzas analice tendencias y proponga ajustes a la política del 4% basados en datos reales.</li>
+        </ul>
+        <!-- Se mantiene el gráfico como ilustración -->
+        <div class="h-72 w-full bg-white p-4 rounded-lg shadow mt-6">
+            <h4 class="text-lg font-semibold mb-3 text-center text-accent-orange">Ilustración: Despachos Validados vs. Casos para Revisión (Límite 4%)</h4>
+            <canvas id="chartComparativo"></canvas>
+            <p class="text-xs text-gray-500 text-center mt-2">
+                *Este gráfico representa la distribución de despachos que cumplen el control y aquellos que exceden el 4%, los cuales requieren una revisión antes de su aprobación.*
+            </p>
+        </div>
+    </div>
+
+    <!-- KPI 2.3: Efectividad en Despachos (Tasa de Devolución) -->
+    <div class="kpi-card">
+        <h3 class="text-primary-blue">2.3. Indicador: Efectividad en Despachos (Tasa de Devolución)</h3>
+        <p class="font-semibold text-text-dark mt-3">Propósito (El "Por Qué"):</p>
+        <p class="text-sm text-gray-700 mb-2">
+            <strong>Garantizar la "entrega perfecta" y fortalecer la confianza en nuestra marca.</strong> Medir esto es clave para reducir los costos ocultos de los errores (devoluciones, re-procesos, mermas) y proteger nuestra reputación en el mercado.
+        </p>
+        <p class="font-semibold text-text-dark mt-3">Objetivo o Cálculo:</p>
+        <div class="formula-box">
+            <span class="math">$$ \text{Tasa de Devolución} = \frac{\text{Valor Total de Mercancía Devuelta}}{\text{Valor Total de Mercancía Despachada}} \times 100 $$</span>
+        </div>
+        <p class="font-semibold text-text-dark mt-3">Beneficios para el Equipo y la Empresa:</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li><strong>Reducción de Costos:</strong> Menos gastos en transporte inverso, manejo de inventario devuelto y papeleo.</li>
+            <li><strong>Clientes más Satisfechos:</strong> Entregas correctas y a tiempo aumentan la lealtad del cliente.</li>
+            <li><strong>Mejora de Procesos Internos:</strong> Nos permite encontrar y corregir fallas en control de calidad, preparación de pedidos y documentación.</li>
+        </ul>
+        <!-- Gráfico de Donut de Efectividad, ilustrando el estado actual del problema -->
+        <div class="h-48 w-full bg-white p-4 rounded-lg shadow mt-6 flex flex-col justify-center items-center">
+            <h4 class="text-lg font-semibold mb-3 text-center">Ilustración: Efectividad Operativa Actual (vs. Devoluciones)</h4>
+            <div class="h-full w-full max-h-48 max-w-48">
+                <canvas id="chartDespachos"></canvas>
+            </div>
+            <p class="text-xs text-gray-500 text-center mt-2">
+                *Se visualiza la proporción actual de devoluciones sobre los despachos, un punto clave para la mejora continua.*
+            </p>
+        </div>
+    </div>
+
+    <!-- KPI 2.4: Rotación de Inventarios -->
+    <div class="kpi-card">
+        <h3 class="text-primary-blue">2.4. Indicador: Rotación de Inventarios (Enfoque Operativo)</h3>
+        <p class="font-semibold text-text-dark mt-3">Propósito (El "Por Qué"):</p>
+        <p class="text-sm text-gray-700 mb-2">
+            <strong>Anticipar y planificar el uso de nuestros espacios y recursos de almacén.</strong> Nuestro análisis de rotación es puramente operativo; no medimos el costo o valor financiero del inventario, sino el movimiento físico de las unidades. Esto nos permite proyectar la salida de productos para organizar el almacén, evitar contaminaciones cruzadas y planificar los recursos que necesitamos.
+        </p>
+        <p class="font-semibold text-text-dark mt-3">Objetivo o Cálculo:</p>
+        <div class="formula-box">
+            <span class="math">$$ \text{Rotación Operativa} = \frac{\text{Unidades Despachadas en el Periodo}}{\text{Unidades Promedio en Inventario}} $$</span>
+        </div>
+        <p class="font-semibold text-text-dark mt-3">Beneficios para el Equipo y la Empresa:</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li><strong>Planificación de Espacios:</strong> Nos da visibilidad para optimizar el layout del almacén y prepararnos para futuras recepciones.</li>
+            <li><strong>Protección de la Calidad:</strong> Ayuda a gestionar la rotación física de la mercancía, clave para evitar contaminaciones y asegurar el despacho correcto de lotes.</li>
+            <li><strong>Presupuesto Operativo:</strong> La proyección de movimientos nos permite costear con mayor precisión recursos como el número de fumigaciones necesarias.</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 4: ANÁLISIS DE PROBLEMAS EN EL PROCESO VENTAS - LOGÍSTICA -->
+    <h2 class="text-primary-blue">3. Análisis de Problemas por Etapa del Proceso</h2>
+    <p class="mb-6 text-gray-700">
+        Identificar de forma clara y honesta los desafíos en cada fase es el primer paso para poder encontrar soluciones reales y colaborativas.
+    </p>
+
+    <!-- ETAPA: Negociación y Venta -->
+    <div class="problem-section">
+        <h3 class="text-text-dark">3.1. Etapa: Negociación y Venta</h3>
+        <p class="font-semibold text-text-dark mt-3">Problemas que Recibimos de otros Equipos:</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li>Promesas de entrega a clientes que no se alinean con nuestra capacidad operativa.</li>
+            <li>Acuerdos sobre fletes o despachos especiales sin consultarnos antes.</li>
+        </ul>
+        <p class="font-semibold text-text-dark mt-3">Problemas que Surgen en el Proceso:</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li>Falta de aviso temprano sobre grandes ventas o promociones que impactan la planificación del almacén.</li>
+        </ul>
+        <p class="font-semibold text-text-dark mt-3">Problemas Generados por Nuestro Equipo (Autocrítica):</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li>No comunicar a Ventas, de forma clara y a tiempo, nuestras limitaciones de capacidad o posibles retrasos en rutas.</li>
+        </ul>
+    </div>
+
+    <!-- ETAPA: Planificación de Entrega -->
+    <div class="problem-section">
+        <h3 class="text-text-dark">3.2. Etapa: Planificación de Entrega</h3>
+        <p class="font-semibold text-text-dark mt-3">Problemas que Recibimos de otros Equipos:</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li>Ingreso de pedidos al sistema fuera del horario límite, complicando la planificación del día siguiente.</li>
+            <li>Cambios de última hora en pedidos que desorganizan la ruta ya planificada.</li>
+        </ul>
+        <p class="font-semibold text-text-dark mt-3">Problemas que Surgen en el Proceso:</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li>Dificultad para consolidar cargas de forma óptima por la dispersión de los pedidos.</li>
+        </ul>
+        <p class="font-semibold text-text-dark mt-3">Problemas Generados por Nuestro Equipo (Autocrítica):</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li>Errores puntuales en la asignación de transportistas o en la optimización de las rutas.</li>
+            <li>Falta de comunicación proactiva a Ventas cuando no podemos cumplir una solicitud de entrega.</li>
+        </ul>
+    </div>
+
+    <!-- ETAPA: Despacho y Transporte -->
+    <div class="problem-section">
+        <h3 class="text-text-dark">3.3. Etapa: Despacho y Transporte</h3>
+        <p class="font-semibold text-text-dark mt-3">Problemas que Recibimos de otros Equipos:</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li>Demoras en la preparación de pedidos por parte de Almacén que retrasan la salida de los camiones.</li>
+            <li>Documentación incorrecta (facturas, notas) que causa retenciones o rechazos en la entrega.</li>
+        </ul>
+        <p class="font-semibold text-text-dark mt-3">Problemas que Surgen en el Proceso:</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li>Imprevistos en la ruta (tráfico, accidentes, fallas mecánicas).</li>
+            <li>Problemas en el punto de entrega (cliente ausente, rechazo de mercancía).</li>
+        </ul>
+        <p class="font-semibold text-text-dark mt-3">Problemas Generados por Nuestro Equipo (Autocrítica):</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li>Errores humanos al contar la mercancía durante la carga.</li>
+            <li>Falta de seguimiento a la flota para anticipar retrasos y comunicarlos a tiempo.</li>
+        </ul>
+    </div>
+
+    <!-- ETAPA: Caso Específico de Interdependencia -->
+    <div class="problem-section">
+        <h3 class="text-text-dark">3.4. Caso Específico: Coordinación Operativa y Calidad (Fumigaciones)</h3>
+        <p class="text-sm text-gray-700">
+            Un ejemplo claro de cómo la planificación de despachos impacta directamente en otras áreas es el **cumplimiento de las fumigaciones**. La falta de una planificación de despachos predecible con clientes clave, como PDVAL, a menudo nos impide liberar las áreas de almacén necesarias para ejecutar el programa de fumigación a tiempo.
+        </p>
+        <p class="font-semibold text-text-dark mt-3">Análisis del Problema:</p>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li><strong>Problema Recibido:</strong> La necesidad de realizar despachos no planificados o de último momento nos impide cumplir con nuestro calendario interno de mantenimiento y calidad.</li>
+            <li><strong>Impacto Directo:</strong> El incumplimiento en las fumigaciones representa un riesgo potencial para la calidad y conservación del producto almacenado.</li>
+            <li><strong>Conexión Ventas-Logística:</strong> Este no es un problema de "excusas", sino la explicación de una interdependencia real. Las decisiones y compromisos de venta tienen un impacto directo en nuestra capacidad para mantener los estándares de calidad en el almacén.</li>
+        </ul>
+    </div>
+
+    <!-- SLIDE 5: PROPUESTAS DE SOLUCIÓN -->
+    <h2 class="text-primary-blue">4. Propuestas de Solución Colaborativas</h2>
+    <p class="mb-6 text-gray-700">
+        Basado en los desafíos que identificamos, estas son algunas acciones concretas que proponemos para mejorar el trabajo entre Ventas y Logística.
+    </p>
+
+    <!-- PROPUESTA: Comunicación y Planificación Integrada -->
+    <div class="solution-section">
+        <h3 class="text-accent-green">4.1. Mejorar la Comunicación y Planificación</h3>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li><strong>Reuniones Semanales:</strong> Juntas cortas y efectivas entre líderes de Ventas y Logística para revisar pronósticos, capacidad y planificar la semana.</li>
+            <li><strong>Sistema de Alerta Temprana:</strong> Un protocolo simple para que Ventas nos avise de promociones o pedidos grandes con anticipación.</li>
+        </ul>
+    </div>
+
+    <!-- PROPUESTA: Optimización del Proceso de Pedidos -->
+    <div class="solution-section">
+        <h3 class="text-accent-green">4.2. Optimizar el Proceso de Pedidos</h3>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li><strong>Respetar Horarios Límite:</strong> Reforzar la política de ingreso de pedidos (1:00 PM) para asegurar una buena planificación.</li>
+            <li><strong>Verificación de Datos:</strong> Implementar una doble verificación de datos críticos (dirección, ítems) antes del despacho para minimizar errores.</li>
+        </ul>
+    </div>
+
+    <!-- PROPUESTA: Gestión de Despachos y Flota -->
+    <div class="solution-section">
+        <h3 class="text-accent-green">4.3. Dar más Visibilidad a los Despachos</h3>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li><strong>Panel de Control Compartido:</strong> Desarrollar un panel sencillo donde ambos equipos puedan ver el estado de las entregas e incidencias.</li>
+            <li><strong>Protocolos de Incidencia:</strong> Definir qué hacer y a quién llamar cuando surja un problema en la ruta, para que todos estemos alineados.</li>
+        </ul>
+    </div>
+    
+    <!-- SLIDE 6: PRÓXIMOS PASOS -->
+    <h2 class="text-primary-blue">5. Próximos Pasos</h2>
+    <p class="mb-6 text-gray-700">
+        Esta Fase 1 se enfoca en el diagnóstico. Reconocemos que hay otras iniciativas estratégicas importantes que podremos abordar en fases futuras.
+    </p>
+
+    <!-- PROPUESTA: Integración de Datos -->
+    <div class="solution-section">
+        <h3 class="text-accent-green">5.1. Futuro: Integración de Datos para BI</h3>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li><strong>Objetivo:</strong> Conectar formalmente los datos de Logística con Compras, Finanzas y Ventas para tomar decisiones más inteligentes.</li>
+            <li><strong>Impacto Esperado:</strong> Mejorar el manejo de inventario, optimizar el flujo de caja y planificar compras de manera más precisa.</li>
+        </ul>
+    </div>
+
+    <!-- PROPUESTA: Sistema Integral de Gestión de Riesgos y Bienestar (Seguridad Laboral) -->
+    <div class="solution-section">
+        <h3 class="text-accent-green">5.2. Futuro: Sistema de Gestión de Seguridad Laboral</h3>
+        <ul class="list-disc list-inside text-sm text-gray-700 ml-4 space-y-1">
+            <li><strong>Objetivo:</strong> Implementar indicadores de seguridad para gestionar riesgos y asegurar el bienestar de nuestro personal.</li>
+            <li><strong>Impacto Esperado:</strong> Reducir costos por incidentes, mejorar el clima laboral y cumplir con las normativas.</li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+    // 1. Registro del plugin de DataLabels
+    Chart.register(ChartDataLabels);
+
+    // 2. DATA DE MUESTRA (solo para gráficos ilustrativos)
+    const kpiData = {
+        transportistasRutaCumplen: [
+            { name: 'Orielmik (Ccs)', rate: 2.48, color: '#28a745' }, /* accent-green */
+            { name: 'Yaciber (Ccs)', rate: 3.04, color: '#0056b3' },  /* primary-blue */
+            { name: 'Trans. EAR (Ccs)', rate: 2.84, color: '#17a2b8' }, /* info blue */
+        ],
+        transportistasRutaExceden: [
+            { name: 'Otoniel (Valles Tuy)', rate: 6.57, color: '#dc3545' }, /* danger red */
+            { name: 'Orielmik (La Guaira)', rate: 8.10, color: '#991b1b' }, /* darker red */
+        ],
+        limiteRuta: 4.0,
+        devolucionesActual: 4.26,
+    };
+
+    // GRÁFICO 1: COMPARATIVO TOTAL DE DESEMPEÑO
+    const totalNames = [...kpiData.transportistasRutaCumplen.map(t => t.name), ...kpiData.transportistasRutaExceden.map(t => t.name)];
+    const totalRates = [...kpiData.transportistasRutaCumplen.map(t => t.rate), ...kpiData.transportistasRutaExceden.map(t => t.rate)];
+    const totalColors = [...kpiData.transportistasRutaCumplen.map(t => t.color), ...kpiData.transportistasRutaExceden.map(t => t.color)];
+
+    const ctxComparativo = document.getElementById('chartComparativo').getContext('2d');
+    new Chart(ctxComparativo, {
+        type: 'bar',
+        data: {
+            labels: totalNames,
+            datasets: [
+                {
+                    label: 'Resultado de Verificación (%)',
+                    data: totalRates,
+                    backgroundColor: totalColors,
+                    borderWidth: 1
+                },
+                {
+                    type: 'line',
+                    label: 'Límite (4.0%)',
+                    data: totalNames.map(() => kpiData.limiteRuta),
+                    borderColor: '#000000',
+                    borderWidth: 2,
+                    fill: false,
+                    pointRadius: 0,
+                    tension: 0,
+                }
+            ]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { filter: (legendItem, chartData) => legendItem.datasetIndex === 1 } },
+                tooltip: {
+                    callbacks: { label: (context) => context.datasetIndex === 0 ? `${context.label}: ${context.parsed.x.toFixed(2)}%` : context.dataset.label }
+                },
+                datalabels: {
+                    display: true, anchor: 'end', align: 'end', color: '#333',
+                    formatter: (value, context) => context.datasetIndex === 0 ? value.toFixed(2) + '%' : null,
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: Math.max(...totalRates) * 1.2,
+                    title: { display: true, text: 'Resultado de la Verificación Pre-Despacho (%)' },
+                    grid: { display: true }
+                },
+                y: {
+                    ticks: { font: { size: 14 }, padding: 5, autoSkip: false },
+                    grid: { display: false }
+                }
+            }
+        }
+    });
+
+    // GRÁFICO DE DONUT PARA TASA DE DEVOLUCIÓN
+    const efectividadActual = 100 - kpiData.devolucionesActual;
+
+    const ctxDespachos = document.getElementById('chartDespachos').getContext('2d');
+    new Chart(ctxDespachos, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                `Efectividad: ${efectividadActual.toFixed(2)}%`,
+                `Tasa de Devolución: ${kpiData.devolucionesActual.toFixed(2)}%`
+            ],
+            datasets: [{
+                data: [efectividadActual, kpiData.devolucionesActual],
+                backgroundColor: ['#28a745', '#dc3545'],
+                hoverBackgroundColor: ['#218838', '#c82333']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: '65%',
+            plugins: {
+                legend: { position: 'bottom' },
+                tooltip: { callbacks: { label: (context) => context.label } },
+                datalabels: { display: false }
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>
+
